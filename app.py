@@ -49,7 +49,7 @@ kafka_consumer = None
 def ping_server(ip: str, port: int):
     try:
         sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        sock.settimeout(0.1)
+        sock.settimeout(0.2)
         sock.connect((ip, port))
         return True
     except socket.error:
@@ -155,7 +155,7 @@ def consume_messages():
             else:
                 services_ping_fail += 1
 
-                if services_ping_fail >= NETWORK_FAIL_CHECK and not project_services_down_message_sent:
+                if services_ping_fail >= 3 and not project_services_down_message_sent:
                     message_queue = []
                     messages_to_display = []
                     message = "⚠️ Facial Recognition System Temporarily Down for Maintenance or Due to an Unexpected Issue ⚠️"
