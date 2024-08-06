@@ -1,0 +1,12 @@
+05-08-2024, Monday 07:37:12 [ERROR] Facial Recognition System Temporarily Down for Maintenance or Due to an Unexpected Issue
+05-08-2024, Monday 07:37:12 [WARNING] Deleted Kafka Consumer as the facial recognition system shutdown.
+05-08-2024, Monday 07:37:12 [INFO] Facial Recognition Attendance System is Getting Started. Please Wait for 2 Minutes
+05-08-2024, Monday 07:39:12 [INFO] Facial Recognition Attendance System Has Been Started. Please Resume Attendance
+05-08-2024, Monday 07:39:17 [INFO] Created a fresh kafka consumer
+05-08-2024, Monday 09:22:07 [ERROR] Received an error message from kafka: KafkaError{code=UNKNOWN_TOPIC_OR_PART,val=3,str="Subscribed topic not available: feedback_messages_topic_for_library-gate: Broker: Unknown topic or partition"}
+05-08-2024, Monday 09:27:54 [ERROR] Received an error message from kafka: KafkaError{code=_TIMED_OUT,val=-185,str="FindCoordinator response error: Local: Timed out"}
+05-08-2024, Monday 16:05:33 [ERROR] Facial Recognition System Temporarily Down for Maintenance or Due to an Unexpected Issue
+05-08-2024, Monday 16:05:34 [WARNING] Deleted Kafka Consumer as the facial recognition system shutdown.
+05-08-2024, Monday 16:05:35 [INFO] Facial Recognition Attendance System is Getting Started. Please Wait for 2 Minutes
+05-08-2024, Monday 16:07:35 [INFO] Facial Recognition Attendance System Has Been Started. Please Resume Attendance
+05-08-2024, Monday 16:07:40 [INFO] Created a fresh kafka consumer

@@ -29,7 +29,7 @@ STATUS_THRESHOLD = 15
 IMAGE_SERVER_ADDRESS = f"http://{DGX_IP_ADDRESS}:20013/post_images"
 
 # Number of times to check for network failure
-NETWORK_FAIL_CHECK = 5
+NETWORK_FAIL_CHECK = 10
 
 # Logs directory path
 LOGS_FOLDER = "logs"

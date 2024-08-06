@@ -51,7 +51,7 @@ kafka_consumer = None
 def ping_server(ip: str, port: int):
     try:
         sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        sock.settimeout(0.2)
+        sock.settimeout(0.5)
         sock.connect((ip, port))
         return True
     except socket.error:
