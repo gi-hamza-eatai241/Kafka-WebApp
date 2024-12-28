@@ -1,0 +1,5 @@
+18-09-2024, Wednesday 14:14:29 [INFO] Network Reconnection Successful
+18-09-2024, Wednesday 14:14:29 [INFO] Created a fresh kafka consumer
+18-09-2024, Wednesday 14:14:38 [ERROR] Network Issue: Unable to Connect to the Server
+18-09-2024, Wednesday 14:14:38 [INFO] Network Reconnection Successful
+18-09-2024, Wednesday 14:14:39 [INFO] Created a fresh kafka consumer

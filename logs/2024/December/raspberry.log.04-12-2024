@@ -1,0 +1,5 @@
+04-12-2024, Wednesday 12:40:25 [ERROR] Facial Recognition System Temporarily Down for Maintenance or Due to an Unexpected Issue
+04-12-2024, Wednesday 12:40:25 [WARNING] Deleted Kafka Consumer as the facial recognition system shutdown.
+04-12-2024, Wednesday 12:17:13 [ERROR] Network Issue: Unable to Connect to the Server
+04-12-2024, Wednesday 12:17:14 [INFO] Network Reconnection Successful
+04-12-2024, Wednesday 12:17:14 [INFO] Created a fresh kafka consumer

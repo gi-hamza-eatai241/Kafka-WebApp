@@ -1,0 +1,13 @@
+06-12-2024, Friday 12:34:15 [ERROR] Network Issue: Unable to Connect to the Server
+06-12-2024, Friday 12:34:21 [WARNING] Deleted Kafka Consumer as the server is not reachable.
+06-12-2024, Friday 12:43:06 [INFO] Network Reconnection Successful
+06-12-2024, Friday 12:43:06 [INFO] Created a fresh kafka consumer
+06-12-2024, Friday 13:17:18 [ERROR] Network Issue: Unable to Connect to the Server
+06-12-2024, Friday 13:17:25 [WARNING] Deleted Kafka Consumer as the server is not reachable.
+06-12-2024, Friday 13:32:35 [INFO] Network Reconnection Successful
+06-12-2024, Friday 13:32:35 [INFO] Created a fresh kafka consumer
+06-12-2024, Friday 13:34:07 [ERROR] Facial Recognition System Temporarily Down for Maintenance or Due to an Unexpected Issue
+06-12-2024, Friday 13:34:07 [WARNING] Deleted Kafka Consumer as the facial recognition system shutdown.
+06-12-2024, Friday 13:37:16 [ERROR] Network Issue: Unable to Connect to the Server
+06-12-2024, Friday 16:40:32 [INFO] Network Reconnection Successful
+06-12-2024, Friday 16:40:32 [ERROR] Facial Recognition System Temporarily Down for Maintenance or Due to an Unexpected Issue

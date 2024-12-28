@@ -1,0 +1,1 @@
+14-08-2024, Wednesday 14:19:09 [ERROR] Received an error message from kafka: KafkaError{code=_TIMED_OUT,val=-185,str="FindCoordinator response error: Local: Timed out"}

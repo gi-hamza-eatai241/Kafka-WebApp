@@ -1,0 +1,51 @@
+10-12-2024, Tuesday 09:50:24 [ERROR] Facial Recognition System Temporarily Down for Maintenance or Due to an Unexpected Issue
+10-12-2024, Tuesday 09:50:24 [WARNING] Deleted Kafka Consumer as the facial recognition system shutdown.
+10-12-2024, Tuesday 09:51:44 [INFO] Facial Recognition Attendance System is Getting Started. Please Wait for 2 Minutes
+10-12-2024, Tuesday 09:53:44 [INFO] Facial Recognition Attendance System Has Been Started. Please Resume Attendance
+10-12-2024, Tuesday 09:53:49 [INFO] Created a fresh kafka consumer
+10-12-2024, Tuesday 09:53:50 [ERROR] Received an error message from kafka: KafkaError{code=UNKNOWN_TOPIC_OR_PART,val=3,str="Subscribed topic not available: feedback_messages_topic_for_library-gate: Broker: Unknown topic or partition"}
+10-12-2024, Tuesday 09:55:09 [ERROR] Facial Recognition System Temporarily Down for Maintenance or Due to an Unexpected Issue
+10-12-2024, Tuesday 09:55:09 [WARNING] Deleted Kafka Consumer as the facial recognition system shutdown.
+10-12-2024, Tuesday 09:56:26 [INFO] Facial Recognition Attendance System is Getting Started. Please Wait for 2 Minutes
+10-12-2024, Tuesday 09:58:27 [INFO] Facial Recognition Attendance System Has Been Started. Please Resume Attendance
+10-12-2024, Tuesday 09:58:32 [INFO] Created a fresh kafka consumer
+10-12-2024, Tuesday 09:58:36 [ERROR] Facial Recognition System Temporarily Down for Maintenance or Due to an Unexpected Issue
+10-12-2024, Tuesday 09:58:36 [WARNING] Deleted Kafka Consumer as the facial recognition system shutdown.
+10-12-2024, Tuesday 10:00:39 [INFO] Facial Recognition Attendance System is Getting Started. Please Wait for 2 Minutes
+10-12-2024, Tuesday 10:02:39 [INFO] Facial Recognition Attendance System Has Been Started. Please Resume Attendance
+10-12-2024, Tuesday 10:02:44 [INFO] Created a fresh kafka consumer
+10-12-2024, Tuesday 10:02:45 [ERROR] Facial Recognition System Temporarily Down for Maintenance or Due to an Unexpected Issue
+10-12-2024, Tuesday 10:02:45 [WARNING] Deleted Kafka Consumer as the facial recognition system shutdown.
+10-12-2024, Tuesday 10:03:39 [INFO] Facial Recognition Attendance System is Getting Started. Please Wait for 2 Minutes
+10-12-2024, Tuesday 10:05:39 [INFO] Facial Recognition Attendance System Has Been Started. Please Resume Attendance
+10-12-2024, Tuesday 10:05:44 [INFO] Created a fresh kafka consumer
+10-12-2024, Tuesday 10:05:46 [ERROR] Facial Recognition System Temporarily Down for Maintenance or Due to an Unexpected Issue
+10-12-2024, Tuesday 10:05:46 [WARNING] Deleted Kafka Consumer as the facial recognition system shutdown.
+10-12-2024, Tuesday 10:05:57 [INFO] Facial Recognition Attendance System is Getting Started. Please Wait for 2 Minutes
+10-12-2024, Tuesday 10:07:58 [INFO] Facial Recognition Attendance System Has Been Started. Please Resume Attendance
+10-12-2024, Tuesday 10:08:03 [INFO] Created a fresh kafka consumer
+10-12-2024, Tuesday 10:20:39 [ERROR] Facial Recognition System Temporarily Down for Maintenance or Due to an Unexpected Issue
+10-12-2024, Tuesday 10:20:39 [WARNING] Deleted Kafka Consumer as the facial recognition system shutdown.
+10-12-2024, Tuesday 10:22:06 [INFO] Facial Recognition Attendance System is Getting Started. Please Wait for 2 Minutes
+10-12-2024, Tuesday 10:24:06 [INFO] Facial Recognition Attendance System Has Been Started. Please Resume Attendance
+10-12-2024, Tuesday 10:24:11 [INFO] Created a fresh kafka consumer
+10-12-2024, Tuesday 10:36:30 [ERROR] Facial Recognition System Temporarily Down for Maintenance or Due to an Unexpected Issue
+10-12-2024, Tuesday 10:36:31 [WARNING] Deleted Kafka Consumer as the facial recognition system shutdown.
+10-12-2024, Tuesday 10:38:00 [INFO] Facial Recognition Attendance System is Getting Started. Please Wait for 2 Minutes
+10-12-2024, Tuesday 10:40:00 [INFO] Facial Recognition Attendance System Has Been Started. Please Resume Attendance
+10-12-2024, Tuesday 10:40:05 [INFO] Created a fresh kafka consumer
+10-12-2024, Tuesday 10:43:39 [ERROR] Facial Recognition System Temporarily Down for Maintenance or Due to an Unexpected Issue
+10-12-2024, Tuesday 10:43:39 [WARNING] Deleted Kafka Consumer as the facial recognition system shutdown.
+10-12-2024, Tuesday 10:44:56 [INFO] Facial Recognition Attendance System is Getting Started. Please Wait for 2 Minutes
+10-12-2024, Tuesday 10:46:56 [INFO] Facial Recognition Attendance System Has Been Started. Please Resume Attendance
+10-12-2024, Tuesday 10:47:01 [INFO] Created a fresh kafka consumer
+10-12-2024, Tuesday 10:56:20 [ERROR] Facial Recognition System Temporarily Down for Maintenance or Due to an Unexpected Issue
+10-12-2024, Tuesday 10:56:20 [WARNING] Deleted Kafka Consumer as the facial recognition system shutdown.
+10-12-2024, Tuesday 10:57:37 [INFO] Facial Recognition Attendance System is Getting Started. Please Wait for 2 Minutes
+10-12-2024, Tuesday 10:59:37 [INFO] Facial Recognition Attendance System Has Been Started. Please Resume Attendance
+10-12-2024, Tuesday 10:59:42 [INFO] Created a fresh kafka consumer
+10-12-2024, Tuesday 13:49:58 [ERROR] Facial Recognition System Temporarily Down for Maintenance or Due to an Unexpected Issue
+10-12-2024, Tuesday 13:49:59 [WARNING] Deleted Kafka Consumer as the facial recognition system shutdown.
+10-12-2024, Tuesday 13:51:16 [INFO] Facial Recognition Attendance System is Getting Started. Please Wait for 2 Minutes
+10-12-2024, Tuesday 13:53:16 [INFO] Facial Recognition Attendance System Has Been Started. Please Resume Attendance
+10-12-2024, Tuesday 13:53:21 [INFO] Created a fresh kafka consumer

@@ -1,0 +1,6 @@
+26-08-2024, Monday 12:49:20 [ERROR] Facial Recognition System Temporarily Down for Maintenance or Due to an Unexpected Issue
+26-08-2024, Monday 12:49:26 [WARNING] Deleted Kafka Consumer as the facial recognition system shutdown.
+26-08-2024, Monday 12:50:09 [INFO] Facial Recognition Attendance System is Getting Started. Please Wait for 2 Minutes
+26-08-2024, Monday 12:52:09 [INFO] Facial Recognition Attendance System Has Been Started. Please Resume Attendance
+26-08-2024, Monday 12:52:14 [INFO] Created a fresh kafka consumer
+26-08-2024, Monday 12:52:15 [ERROR] Received an error message from kafka: KafkaError{code=UNKNOWN_TOPIC_OR_PART,val=3,str="Subscribed topic not available: feedback_messages_topic_for_library-gate: Broker: Unknown topic or partition"}

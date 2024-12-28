@@ -1,0 +1,42 @@
+16-11-2024, Saturday 09:29:35 [ERROR] Network Issue: Unable to Connect to the Server
+16-11-2024, Saturday 09:29:40 [WARNING] Deleted Kafka Consumer as the server is not reachable.
+16-11-2024, Saturday 09:27:52 [ERROR] Network Issue: Unable to Connect to the Server
+16-11-2024, Saturday 09:30:59 [INFO] Network Reconnection Successful
+16-11-2024, Saturday 09:30:59 [INFO] Created a fresh kafka consumer
+16-11-2024, Saturday 09:38:03 [ERROR] Network Issue: Unable to Connect to the Server
+16-11-2024, Saturday 09:38:08 [WARNING] Deleted Kafka Consumer as the server is not reachable.
+16-11-2024, Saturday 09:38:50 [INFO] Network Reconnection Successful
+16-11-2024, Saturday 09:38:50 [INFO] Created a fresh kafka consumer
+16-11-2024, Saturday 11:52:48 [ERROR] Facial Recognition System Temporarily Down for Maintenance or Due to an Unexpected Issue
+16-11-2024, Saturday 11:52:48 [WARNING] Deleted Kafka Consumer as the facial recognition system shutdown.
+16-11-2024, Saturday 11:58:24 [INFO] Facial Recognition Attendance System is Getting Started. Please Wait for 2 Minutes
+16-11-2024, Saturday 12:00:24 [INFO] Facial Recognition Attendance System Has Been Started. Please Resume Attendance
+16-11-2024, Saturday 12:00:29 [INFO] Created a fresh kafka consumer
+16-11-2024, Saturday 12:30:18 [ERROR] Network Issue: Unable to Connect to the Server
+16-11-2024, Saturday 12:31:21 [WARNING] Deleted Kafka Consumer as the server is not reachable.
+16-11-2024, Saturday 12:34:27 [INFO] Network Reconnection Successful
+16-11-2024, Saturday 12:34:27 [INFO] Created a fresh kafka consumer
+16-11-2024, Saturday 12:35:41 [ERROR] Network Issue: Unable to Connect to the Server
+16-11-2024, Saturday 12:35:48 [WARNING] Deleted Kafka Consumer as the server is not reachable.
+16-11-2024, Saturday 12:35:48 [INFO] Network Reconnection Successful
+16-11-2024, Saturday 12:35:48 [INFO] Created a fresh kafka consumer
+16-11-2024, Saturday 12:35:49 [ERROR] Network Issue: Unable to Connect to the Server
+16-11-2024, Saturday 12:35:49 [WARNING] Deleted Kafka Consumer as the server is not reachable.
+16-11-2024, Saturday 12:35:54 [INFO] Network Reconnection Successful
+16-11-2024, Saturday 12:35:54 [INFO] Created a fresh kafka consumer
+16-11-2024, Saturday 12:36:47 [ERROR] Network Issue: Unable to Connect to the Server
+16-11-2024, Saturday 12:36:48 [INFO] Network Reconnection Successful
+16-11-2024, Saturday 12:36:48 [INFO] Created a fresh kafka consumer
+16-11-2024, Saturday 12:51:17 [ERROR] Network Issue: Unable to Connect to the Server
+16-11-2024, Saturday 12:51:18 [INFO] Network Reconnection Successful
+16-11-2024, Saturday 12:51:18 [INFO] Created a fresh kafka consumer
+16-11-2024, Saturday 13:00:02 [INFO] Created a fresh kafka consumer
+16-11-2024, Saturday 14:10:55 [ERROR] Network Issue: Unable to Connect to the Server
+16-11-2024, Saturday 14:10:56 [INFO] Network Reconnection Successful
+16-11-2024, Saturday 14:10:56 [INFO] Created a fresh kafka consumer
+16-11-2024, Saturday 15:17:14 [ERROR] Network Issue: Unable to Connect to the Server
+16-11-2024, Saturday 15:17:15 [INFO] Network Reconnection Successful
+16-11-2024, Saturday 15:17:15 [INFO] Created a fresh kafka consumer
+16-11-2024, Saturday 17:01:00 [ERROR] Network Issue: Unable to Connect to the Server
+16-11-2024, Saturday 17:01:01 [INFO] Network Reconnection Successful
+16-11-2024, Saturday 17:01:01 [INFO] Created a fresh kafka consumer

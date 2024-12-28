@@ -1,0 +1,4 @@
+10-09-2024, Tuesday 09:56:01 [ERROR] Network Issue: Unable to Connect to the Server
+10-09-2024, Tuesday 09:56:07 [WARNING] Deleted Kafka Consumer as the server is not reachable.
+10-09-2024, Tuesday 09:56:52 [INFO] Network Reconnection Successful
+10-09-2024, Tuesday 09:56:52 [INFO] Created a fresh kafka consumer

@@ -1,0 +1,5 @@
+30-11-2024, Saturday 10:09:02 [ERROR] Facial Recognition System Temporarily Down for Maintenance or Due to an Unexpected Issue
+30-11-2024, Saturday 10:09:02 [WARNING] Deleted Kafka Consumer as the facial recognition system shutdown.
+30-11-2024, Saturday 10:10:17 [INFO] Facial Recognition Attendance System is Getting Started. Please Wait for 2 Minutes
+30-11-2024, Saturday 10:12:17 [INFO] Facial Recognition Attendance System Has Been Started. Please Resume Attendance
+30-11-2024, Saturday 10:12:22 [INFO] Created a fresh kafka consumer
