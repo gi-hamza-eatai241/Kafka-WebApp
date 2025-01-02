@@ -1,0 +1,25 @@
+31-12-2024, Tuesday 14:54:23 [ERROR] Facial Recognition System Temporarily Down for Maintenance or Due to an Unexpected Issue
+31-12-2024, Tuesday 14:54:23 [WARNING] Deleted Kafka Consumer as the facial recognition system shutdown.
+31-12-2024, Tuesday 14:55:51 [INFO] Facial Recognition Attendance System is Getting Started. Please Wait for 2 Minutes
+31-12-2024, Tuesday 14:57:52 [INFO] Facial Recognition Attendance System Has Been Started. Please Resume Attendance
+31-12-2024, Tuesday 14:57:57 [INFO] Created a fresh kafka consumer
+31-12-2024, Tuesday 14:57:57 [ERROR] Facial Recognition System Temporarily Down for Maintenance or Due to an Unexpected Issue
+31-12-2024, Tuesday 14:57:57 [WARNING] Deleted Kafka Consumer as the facial recognition system shutdown.
+31-12-2024, Tuesday 15:01:44 [ERROR] Network Issue: Unable to Connect to the Server
+31-12-2024, Tuesday 15:01:45 [INFO] Network Reconnection Successful
+31-12-2024, Tuesday 15:01:45 [INFO] Created a fresh kafka consumer
+31-12-2024, Tuesday 15:01:45 [ERROR] Received an error message from kafka: KafkaError{code=UNKNOWN_TOPIC_OR_PART,val=3,str="Subscribed topic not available: abesit-library-gate-cam: Broker: Unknown topic or partition"}
+31-12-2024, Tuesday 15:05:51 [ERROR] Network Issue: Unable to Connect to the Server
+31-12-2024, Tuesday 15:05:51 [ERROR] Network Issue: Unable to Connect to the Server
+31-12-2024, Tuesday 15:05:53 [INFO] Network Reconnection Successful
+31-12-2024, Tuesday 15:05:53 [INFO] Created a fresh kafka consumer
+31-12-2024, Tuesday 15:23:31 [ERROR] Facial Recognition System Temporarily Down for Maintenance or Due to an Unexpected Issue
+31-12-2024, Tuesday 15:23:31 [WARNING] Deleted Kafka Consumer as the facial recognition system shutdown.
+31-12-2024, Tuesday 15:24:48 [INFO] Facial Recognition Attendance System is Getting Started. Please Wait for 2 Minutes
+31-12-2024, Tuesday 15:26:48 [INFO] Facial Recognition Attendance System Has Been Started. Please Resume Attendance
+31-12-2024, Tuesday 15:26:53 [INFO] Created a fresh kafka consumer
+31-12-2024, Tuesday 15:33:39 [ERROR] Facial Recognition System Temporarily Down for Maintenance or Due to an Unexpected Issue
+31-12-2024, Tuesday 15:33:39 [WARNING] Deleted Kafka Consumer as the facial recognition system shutdown.
+31-12-2024, Tuesday 15:36:28 [INFO] Facial Recognition Attendance System is Getting Started. Please Wait for 2 Minutes
+31-12-2024, Tuesday 15:38:28 [INFO] Facial Recognition Attendance System Has Been Started. Please Resume Attendance
+31-12-2024, Tuesday 15:38:33 [INFO] Created a fresh kafka consumer
