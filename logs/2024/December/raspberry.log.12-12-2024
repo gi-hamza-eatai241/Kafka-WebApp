@@ -1,1 +1,0 @@
-12-12-2024, Thursday 12:00:23 [ERROR] Received an error message from kafka: KafkaError{code=_MAX_POLL_EXCEEDED,val=-147,str="Application maximum poll interval (300000ms) exceeded by 606ms"}
