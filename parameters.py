@@ -2,7 +2,7 @@
 DGX_IP_ADDRESS = "192.168.12.1"
 
 PROJECT_SERVICES_PORT = [
-    6385, 19000, 19001,    # InsightFace
+    6385, 19000, 19001,     # InsightFace
     19530,                  # Milvus Vector Database
     9092,                   # Kafka Broker
     6381,                   # Redis Database

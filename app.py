@@ -158,7 +158,6 @@ def consume_messages():
                             message_queue.insert(0, decoded_kafka_message)
                             # print(message_queue)
                             message_data_to_send = {"messages": message_queue}
-                            # socketio.emit('new_message', {'message': [message_data_to_send]})
                             data = json.dumps(message_data_to_send)
                             post_message_queue_and_get_images(data)
                             message_queue = []
