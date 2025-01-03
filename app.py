@@ -152,11 +152,13 @@ def consume_messages():
                         # print(f"\nMESSAGE RECEIVED FROM KAFKA: {decoded_kafka_message}\n")
                         # Check if coming message is an ERROR message or SUCCESS message
                         if decoded_kafka_message.split(": ")[0] in ["ERROR", "SUCCESS"]:
+                            message_key, message_value = decoded_kafka_message.split(": ")
                             message_queue = []
                             # print(message_queue)
                             message_queue.insert(0, decoded_kafka_message)
                             # print(message_queue)
                             message_data_to_send = {"messages": message_queue}
+                            # socketio.emit('new_message', {'message': [message_data_to_send]})
                             data = json.dumps(message_data_to_send)
                             post_message_queue_and_get_images(data)
                             message_queue = []

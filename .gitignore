@@ -141,4 +141,5 @@ archieve/
 # ignore PyCharm
 .idea/
 
+# Log Files
 logs/
