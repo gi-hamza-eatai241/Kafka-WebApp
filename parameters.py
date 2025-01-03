@@ -17,7 +17,7 @@ CONFLUENT_KAFKA_IP_ADDRESS = DGX_IP_ADDRESS
 CONFLUENT_KAFKA_PORT = 9092
 
 # Kafka topic for messages
-CONFLUENT_KAFKA_TOPIC = "feedback_messages_topic_for_abesit-library-gate"
+CONFLUENT_KAFKA_TOPIC = "abesit-library"
 
 # Number of names to be displayed at once
 DISPLAY_LIST_SIZE = 4
