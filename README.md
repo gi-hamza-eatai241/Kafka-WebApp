@@ -1,56 +1,108 @@
-# Configuring Raspberry Pi as a Recognition Message Displayer
+# First Time Raspberry Pi Configuration as a Recognition Message Displayer
 
 ## 1. Installing OS
 
-Click the following link to get started with your Raspberry Pi:<br>
+Click the following link to get started with your Raspberry Pi:
+
 <https://www.raspberrypi.com/documentation/computers/getting-started.html>
 
-Additionally, you can walk through the following link to do your custom configurations:<br><https://www.raspberrypi.com/documentation/computers/configuration.html>
+Additionally, you can walk through the following link to do your custom configurations:
+
+<https://www.raspberrypi.com/documentation/computers/configuration.html>
+
+> NOTE: You must give the following specified ***username*** and ***hostname*** while OS installation for the successful setup of your Raspberry Pi. If not given so, you may encounter several issues.
+
+- **username:** *raspberry*
+- **hostname:** *raspberry*
 
 ## 2. Enabling Kafka Consumer's Flask Application Service
 
 ### The Structure of Flask Application
 
-<pre>
+```tree
 Kafka-WebApp
    ├── static/
    │   └── img/
-   │       ├── abesit_logo.png
-   │       └── giventures_logo.png
+   │       ├── abesit-logo.png
+   |       ├── camera-logo.png
+   |       ├── nvidia-logo.png
+   │       └── giventures-logo.png
    ├── templates/
-   │   ├── index.html
+   │   └── index.html
    ├── app.py
+   ├── custom_logging.py
    ├── parameters.py
    └── requirements.txt
-</pre>
+```
+
+To get the `Kafka-WebApp` onto the Raspberry Pi, you can clone the repository from GitHub.
+
+```bash
+# Clone GitHub Repository
+git clone git@github.com:gi-hamza-eatai241/Kafka-WebApp.git
+
+# Change directpry to Kafka-WebApp
+cd Kafka-WebApp
+```
 
 ### The `parameters.py` file
 
-The `parameters.py` file contains two important information to fetch messages from the Kafka Server which are the *address of the Kafka Broker* and the *topic name*. You need to change these as per your requiremnets.
+The [`parameters.py`](Kafka-WebApp/parameters.py) file contains important information to setup your flask application. You need to change these as per your requiremnets.
 
 ```python
+# Project Services
+DGX_IP_ADDRESS <IP Address of DGX>    # e.g., "192.168.12.89"
+
+PROJECT_SERVICES_PORT = [
+    6385, 19000, 19001,     # InsightFace
+    19530,                  # Milvus Vector database
+    9092,                   # Kafka Broker
+    6381,                   # Redis Database
+    20001,                  # Database-Controller
+    20012,                  # Kafka-Message-Controller
+    20013,                  # Display-Image-Server
+    6386, 6970, 6971        # Face Liveness Detection
+]
+
 # Kafka IP and Port
-CONFLUENT_KAFKA_IP_ADDRESS = '192.168.12.1'
+CONFLUENT_KAFKA_IP_ADDRESS = DGX_IP_ADDRESS
 CONFLUENT_KAFKA_PORT = 9092
 
 # Kafka topic for messages
-CONFLUENT_KAFKA_TOPIC = 'feedback_messages_topic_for_library-gate'
+CONFLUENT_KAFKA_TOPIC = "feedback_messages_topic_for_<Replace with Camera-Name>"    # e.g., "feedback_messages_topic_for_library-gate"
+
+# Number of names to be displayed at once
+DISPLAY_LIST_SIZE = 4
+
+# Message Retention time on Screen
+STATUS_THRESHOLD = 15
+
+# Image Server Address
+IMAGE_SERVER_ADDRESS = f"http://{DGX_IP_ADDRESS}:20013/post_images"
+
+# Number of times to check for network failure
+NETWORK_FAIL_CHECK = 10
+
+# Logs directory path
+LOGS_FOLDER = "logs"
 ```
 
 Once you made these, the next step is install the requirements required by the `Kafka-WebApp`
 
 ### The `requirements.txt` file
 
-The `requirements.txt` file contains the packages/libraries required for the **Kafka-WebApp**
+The [`requirements.txt`](Kafka-WebApp/requirements.txt) file contains the packages/libraries required for the **Kafka-WebApp**
 
 You can install these requirements by running the following command on the Raspberry Pi terminal
 
 ```bash
+# Create and Activate a Python Virtual Environment
 python3 -m venv venv
 source venv/bin/activate
 ```
 
 ```bash
+# Upgrade pip and install the requirements
 python3 -m pip install --upgrade pip
 python3 -m pip install -r requirements.txt
 ```
@@ -138,7 +190,7 @@ sudo systemctl enable flask-application-startup.service
 ### Step - 1) Install the Chromium Browser and Other Packages
 
 ```bash
-sudo apt-get update
+sudo apt-get update && sudo apt-get upgrade -y
 sudo apt-get install chromium-browser unclutter xdotool
 ```
 
@@ -164,7 +216,7 @@ sed -i 's/"exit_type":"Crashed"/"exit_type":"Normal"/' /home/raspberry/.config/c
 
 while true; do
     xdotool keydown ctrl+Tab; xdotool keyup ctrl+Tab;
-    sleep 10
+    sleep 30
 done
 ```
 
