@@ -98,13 +98,12 @@
             margin: auto;
             font-size: 6vh;
             text-align: center;
-            color: green;
+            color: #00ff00;
         }
 
         footer>img {
             height: 90%;
-            margin: auto;
-            margin-left: 10px;
+            margin: auto auto auto 10px;
         }
 
         #disclaimer {
@@ -117,14 +116,14 @@
 <body>
     <nav>
         <div class="nav_logo">
-            <img src="{{ url_for('static', filename='img/giventures-logo.png') }}">
+            <img src="{{ url_for('static', filename='img/giventures-logo.png') }}" alt="">
 	    <div id="disclaimer">Your name will not be displayed if your dataset has not been created</div>
-	    <img src="{{ url_for('static', filename='img/abesit-logo.png') }}">
+	    <img src="{{ url_for('static', filename='img/abesit-logo.png') }}" alt="">
         </div>
         <div class="navlower">
-            <img src="{{ url_for('static', filename='img/camera-logo.png') }}">
+            <img src="{{ url_for('static', filename='img/camera-logo.png') }}" alt="">
             <div>PLEASE LOOK INTO THE CAMERA</div>
-            <img src="{{ url_for('static', filename='img/camera-logo.png') }}">
+            <img src="{{ url_for('static', filename='img/camera-logo.png') }}" alt="">
 	</div>
     </nav>
     <main>
@@ -134,17 +133,17 @@
         </table>
     </main>
     <footer>
-        <img src="{{ url_for('static', filename='img/nvidia-logo.png') }}">
+        <img src="{{ url_for('static', filename='img/nvidia-logo.png') }}" alt="">
     </footer>
 
     <script type="text/javascript">
-        var socket = io.connect('http://' + document.domain + ':' + location.port);
-        var lastUpdate = Date.now();
-        var clearIntervalTime = 15000; // 15 seconds
-        var errorMessage = ''; // Store the current error message
-        var successMessage = ''; // Store the current success message
-        var isErrorPersisted = false; // Flag to check if error message should persist
-        var isSuccessPersisted = false; // Flag to check if success message should persist
+        const socket = io.connect('http://' + document.domain + ':' + location.port);
+        let lastUpdate = Date.now();
+        const clearIntervalTime = 15000; // 15 seconds
+        let errorMessage = ''; // Store the current error message
+        let successMessage = ''; // Store the current success message
+        let isErrorPersisted = false; // Flag to check if error message should persist
+        let isSuccessPersisted = false; // Flag to check if success message should persist
 
         socket.on('connect', function () {
             console.log("Connected to server");
