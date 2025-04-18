@@ -153,7 +153,7 @@ def consume_messages():
                         decoded_kafka_message = message_from_kafka.value().decode()
                         # print(f"\nMESSAGE RECEIVED FROM KAFKA: {decoded_kafka_message}\n")
                         # Check if coming message is an ERROR message or SUCCESS message
-                        if decoded_kafka_message.split(": ")[0] in ["ERROR", "SUCCESS"]:
+                        if decoded_kafka_message.split(": ")[0].startswith("ERROR") or decoded_kafka_message.split(": ")[0].startswith("SUCCESS"):
                             message_key, message_value = decoded_kafka_message.split(": ")
                             message_queue = []
                             # print(message_queue)
