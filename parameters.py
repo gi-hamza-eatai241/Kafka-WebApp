@@ -17,7 +17,8 @@ CONFLUENT_KAFKA_IP_ADDRESS = DGX_IP_ADDRESS
 CONFLUENT_KAFKA_PORT = 9092
 
 # Kafka topic for messages
-CONFLUENT_KAFKA_TOPIC = "maingate_entry_cctv-camera-2"
+CONFLUENT_KAFKA_TOPIC = "maingate_entry"
+CONFLUENT_KAFKA_PARTITION = 4
 
 # Number of names to be displayed at once
 DISPLAY_LIST_SIZE = 4

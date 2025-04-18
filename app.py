@@ -3,13 +3,14 @@ import threading
 import time
 import json
 import requests
-from confluent_kafka import Consumer
+from confluent_kafka import Consumer, TopicPartition, OFFSET_END
 from flask import Flask, render_template
 from flask_socketio import SocketIO, emit
 from custom_logging import feedback_client_logger
 from parameters import CONFLUENT_KAFKA_IP_ADDRESS, \
     CONFLUENT_KAFKA_PORT, \
     CONFLUENT_KAFKA_TOPIC, \
+    CONFLUENT_KAFKA_PARTITION, \
     DISPLAY_LIST_SIZE, \
     IMAGE_SERVER_ADDRESS, \
     STATUS_THRESHOLD, \
@@ -128,7 +129,8 @@ def consume_messages():
                 if kafka_consumer is None:
                     # Create a Kafka Consumer
                     kafka_consumer = Consumer(kafka_conf)
-                    kafka_consumer.subscribe([CONFLUENT_KAFKA_TOPIC])
+                    topic_partition = TopicPartition(CONFLUENT_KAFKA_TOPIC, CONFLUENT_KAFKA_PARTITION, OFFSET_END)
+                    kafka_consumer.assign([topic_partition])
                     feedback_client_logger.info("Created a fresh kafka consumer")
 
                 # print(f"\nKAFKA CONSUMER AFTER SUCCESSFUL START OF THE PROJECT: {kafka_consumer}\n")
@@ -163,11 +165,12 @@ def consume_messages():
                             message_queue = []
                             # print(message_queue)
                         else:
-                            if decoded_kafka_message not in message_queue:
+                            if decoded_kafka_message.split(": ")[1] not in message_queue:
+                                _, id_ = decoded_kafka_message.split(": ")
                                 if len(message_queue) >= DISPLAY_LIST_SIZE:
                                     message_queue.pop()
                                 # print(message_queue)
-                                message_queue.insert(0, decoded_kafka_message)
+                                message_queue.insert(0, id_)
                                 # print(message_queue)
                                 message_data_to_send = {"messages": message_queue}
                                 data = json.dumps(message_data_to_send)
