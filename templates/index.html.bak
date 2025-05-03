@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kafka Messages</title>
+    <style>
+        body {
+            background: radial-gradient(#0202a8, #0000fb);
+            color: #fff;
+            background-size: cover;
+            margin: 0;
+            padding: 0;
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+            font-weight: bold;
+        }
+
+        nav {
+            height: 25vh;
+        }
+
+        main {
+            width: 100%;
+            height: 70vh;
+            display: flex;
+        }
+
+        footer {
+            height: 5vh;
+        }
+
+        .nav_logo {
+            height: 50%;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+	    font-size:1.75vw;
+	    color: yellow;
+	}
+
+        .nav_logo>img {
+            height: 70%;
+            padding: 0.5vw;
+        }
+
+        .navlower {
+            height: 50%;
+            font-size: 3vw;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: yellow;
+        }
+
+        .navlower>img {
+            height: 6vw;
+            padding: 0 6vw;
+        }
+
+        table {
+            height: 100%;
+            width: 60vw;
+            margin: auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        tbody {
+            width: 100%;
+        }
+
+        .row {
+            width: 100%;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 8vh;
+        }
+
+        .row>td>img {
+            height: 15vh;
+            border-radius: 10%;
+            border: 0.5vh solid rgb(97, 93, 93)
+        }
+
+        .error {
+            margin: auto;
+            font-size: 6vh;
+            text-align: center;
+            color: #ff0000;
+        }
+
+        .success {
+            margin: auto;
+            font-size: 6vh;
+            text-align: center;
+            color: #00ff00;
+        }
+
+        footer>img {
+            height: 90%;
+            margin: auto auto auto 10px;
+        }
+
+        #disclaimer {
+            display: none;
+        }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
+</head>
+
+<body>
+    <nav>
+        <div class="nav_logo">
+            <img src="{{ url_for('static', filename='img/giventures-logo.png') }}" alt="">
+	    <div id="disclaimer">Your name will not be displayed if your dataset has not been created</div>
+	    <img src="{{ url_for('static', filename='img/abesit-logo.png') }}" alt="">
+        </div>
+        <div class="navlower">
+            <img src="{{ url_for('static', filename='img/camera-logo.png') }}" alt="">
+            <div>PLEASE LOOK INTO THE CAMERA</div>
+            <img src="{{ url_for('static', filename='img/camera-logo.png') }}" alt="">
+	</div>
+    </nav>
+    <main>
+        <table>
+            <tbody id="rows">
+            </tbody>
+        </table>
+    </main>
+    <footer>
+        <img src="{{ url_for('static', filename='img/nvidia-logo.png') }}" alt="">
+    </footer>
+
+    <script type="text/javascript">
+        function getCurrentTimestamp() {
+            const now = new Date();
+
+            const year = now.getFullYear();
+            const month = String(now.getMonth() + 1).padStart(2, '0'); // Month is 0-indexed
+            const day = String(now.getDate()).padStart(2, '0');
+
+            let hours = now.getHours();
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            const seconds = String(now.getSeconds()).padStart(2, '0');
+            const milliseconds = String(now.getMilliseconds()).padStart(3, '0');
+
+            const ampm = hours >= 12 ? 'PM' : 'AM';
+            hours = hours % 12 || 12;
+            hours = String(hours).padStart(2, '0');
+
+            return `${day}-${month}-${year} ${hours}:${minutes}:${seconds}.${milliseconds} ${ampm}`;
+        }
+
+        const socket = io.connect('http://' + document.domain + ':' + location.port);
+        let lastUpdate = Date.now();
+        const clearIntervalTime = 15000; // 15 seconds
+        let errorMessage = ''; // Store the current error message
+        let successMessage = ''; // Store the current success message
+        let isErrorPersisted = false; // Flag to check if error message should persist
+        let isSuccessPersisted = false; // Flag to check if success message should persist
+
+        socket.on('connect', function () {
+            // console.log("Connected to server");
+        });
+
+        socket.on('new_message', function (data) {
+            if (data.message.length > 0) {
+                // pull out just the keys
+                const ids = data.message.map(item => Object.keys(item)[0]);
+                console.log(getCurrentTimestamp(), ids);
+            }
+
+            const errorMessages = data.message.filter(item => item.hasOwnProperty('ERROR'));
+            const successMessages = data.message.filter(item => item.hasOwnProperty('SUCCESS'));
+
+            if (errorMessages.length > 0) {
+                // console.log("Error message received:", errorMessages[0].ERROR);
+                errorMessage = errorMessages[0].ERROR;
+                isErrorPersisted = true;
+                isSuccessPersisted = false; // Clear success flag if an error occurs
+                successMessage = ''; // Clear success message if an error occurs
+            } else if (successMessages.length > 0) {
+                // console.log("Success message received:", successMessages[0].SUCCESS);
+                successMessage = successMessages[0].SUCCESS;
+                isSuccessPersisted = true;
+                isErrorPersisted = false; // Clear error flag if a success occurs
+                errorMessage = ''; // Clear error message if a success occurs
+                if (successMessage === "✅ Facial Recognition Attendance System is Getting Started. Please Wait for 2 Minutes ✅") {
+                    setTimeout(() => {
+                        // console.log("Special success message display duration ended.");
+                        isSuccessPersisted = false;
+                    }, 120000); // Keep the message for 2 minutes
+                } else {
+                    setTimeout(() => {
+                        // console.log("Normal success message display duration ended.");
+                        isSuccessPersisted = false;
+                    }, 5000); // Normal success message display duration
+                }
+            } else if (data.message.length > 0) {
+                // console.log("Normal messages received:", data.message);
+                isErrorPersisted = false;
+                errorMessage = ''; // Clear error message if valid data is received
+            }
+
+            if (isErrorPersisted) {
+                // console.log("Displaying error message:", errorMessage);
+                updateMessage([{ 'ERROR': errorMessage }], 'error');
+            } else if (isSuccessPersisted) {
+                // console.log("Displaying success message:", successMessage);
+                updateMessage([{ 'SUCCESS': successMessage }], 'success');
+            } else {
+                // console.log("Displaying normal messages.");
+                updateMessage(data.message, 'normal');
+            }
+
+            lastUpdate = Date.now(); // Update the last update time
+        });
+
+        function updateMessage(message, messageType) {
+            // console.log("Updating message display:", message, messageType);
+            const container = document.getElementById('rows');
+            container.innerHTML = ''; // Clear previous rows
+
+            message.forEach(item => {
+                const rowElement = document.createElement('tr');
+                rowElement.className = 'row';
+
+                const key = Object.keys(item)[0];
+                const value = item[key];
+
+                if (key === 'SUCCESS') {
+                    // console.log("Creating SUCCESS message row.");
+                    const labelSuccessCell = document.createElement('td');
+                    const textElement = document.createElement('span');
+                    labelSuccessCell.classList.add('success');
+                    labelSuccessCell.colSpan = 2;
+                    textElement.textContent = value;
+                    labelSuccessCell.appendChild(textElement);
+                    rowElement.appendChild(labelSuccessCell);
+                } else if (key === 'ERROR') {
+                    // console.log("Creating ERROR message row.");
+                    const labelErrorCell = document.createElement('td');
+                    const textElement = document.createElement('span');
+                    labelErrorCell.classList.add('error');
+                    labelErrorCell.colSpan = 2;
+                    textElement.textContent = value;
+                    labelErrorCell.appendChild(textElement);
+                    rowElement.appendChild(labelErrorCell);
+                } else {
+                    // console.log("Creating normal message row.");
+                    // Create an image element
+                    const imageCell = document.createElement('td');
+                    const imageElement = document.createElement('img');
+                    imageElement.src = "data:image/jpg;base64," + value;
+                    imageCell.appendChild(imageElement);
+
+                    // Create a text element for row data
+                    const labelCell = document.createElement('td');
+                    const textElement = document.createElement('span');
+                    textElement.classList.add('normal');
+                    textElement.textContent = key;
+                    labelCell.appendChild(textElement);
+
+                    // Append image and text to row element
+                    rowElement.appendChild(labelCell);
+                    rowElement.appendChild(imageCell);
+                }
+
+                container.appendChild(rowElement);
+            });
+
+            // Adjust text color based on message type
+            const errorContainer = document.querySelector('.error');
+            const successContainer = document.querySelector('.success');
+            const normalContainers = document.querySelectorAll('.normal');
+            if (messageType === 'error' && errorContainer) {
+                errorContainer.style.color = '#FF0000';
+            } else if (messageType === 'success' && successContainer) {
+                successContainer.style.color = '#00FF00';
+            } else {
+                normalContainers.forEach(container => {
+                    container.style.color = '#FFFFFF';
+                });
+            }
+        }
+
+        setInterval(function () {
+            socket.emit('check_updates');
+        }, 100); // Check for updates every 100 milliseconds (adjust as needed)
+
+        setInterval(function () {
+            if (!isErrorPersisted && !isSuccessPersisted && Date.now() - lastUpdate > clearIntervalTime) {
+                // console.log("Clearing messages due to inactivity.");
+                // Clear the message display if no updates for 10 seconds and no error or success displayed
+                updateMessage([], 'normal');
+            }
+        }, 1000); // Check every second if messages should be cleared
+    </script>
+    <script id="json-data" type="application/json">{{ message|tojson }}</script>
+</body>
+
+</html>

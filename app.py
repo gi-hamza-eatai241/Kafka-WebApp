@@ -150,7 +150,11 @@ def consume_messages():
                         # while kafka_consumer.poll() is None:
                         #     continue
                     else:
+                        key = message_from_kafka.key().decode()
                         decoded_kafka_message = message_from_kafka.value().decode()
+                        timestamp_type, timestamp_milliseconds = message_from_kafka.timestamp()
+                        timestamp = datetime.fromtimestamp(timestamp_milliseconds / 1000.0).strftime("%d-%m-%Y %I:%M:%S.%f %p")[:-3]
+                        feedback_client_logger.debug(f"[KAFKA] Key = {key}, Message = {decoded_kafka_message}, Timestamp = {timestamp}")
                         # print(f"\nMESSAGE RECEIVED FROM KAFKA: {decoded_kafka_message}\n")
                         # Check if coming message is an ERROR message or SUCCESS message
                         if decoded_kafka_message.split(": ")[0].startswith("ERROR") or decoded_kafka_message.split(": ")[0].startswith("SUCCESS"):
@@ -243,6 +247,12 @@ def handle_check_updates():
     global messages_to_display
     emit('new_message', {'message': messages_to_display})
 
+@socketio.on('client_log')
+def handle_client_log(data):
+    msg = data.get('message', '')
+    # append a line to client_console.log
+    with open('client_console.log', 'a') as f:
+        f.write(f"{msg}\n")
 
 @app.route('/')
 def index():
