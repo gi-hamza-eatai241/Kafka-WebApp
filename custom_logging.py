@@ -9,11 +9,11 @@ from datetime import datetime
 from parameters import LOGS_FOLDER
 
 # Function to create the log file path with year/month folder structure
-def get_log_file_path(logs_folder, logger_name, base_filename):
+def get_log_file_path(logs_folder, base_filename):
     current_date = datetime.now()
     current_month = current_date.strftime("%B")
     current_year = current_date.strftime("%Y")
-    log_dir = os.path.join(logs_folder, current_year, current_month, logger_name)
+    log_dir = os.path.join(logs_folder, current_year, current_month)
     os.makedirs(log_dir, exist_ok=True)
     return os.path.join(log_dir, base_filename)
 
@@ -66,7 +66,7 @@ class DynamicTimedRotatingFileHandler(TimedRotatingFileHandler):
 os.makedirs(LOGS_FOLDER, exist_ok=True)
 
 # Define log file paths for each component
-feedback_path_func = lambda: get_log_file_path(LOGS_FOLDER, "feedbackClientLogger", f"raspberry.log")
+feedback_path_func = lambda: get_log_file_path(LOGS_FOLDER, f"raspberry.log")
 
 
 # Function to configure a logger with our dynamic handler.
@@ -78,7 +78,7 @@ def configure_logger(name, path_func, level=logging.DEBUG):
     if not logger.handlers:
         handler = DynamicTimedRotatingFileHandler(path_func, when="midnight", interval=1, backupCount=31)
         handler.suffix = "%d-%m-%Y"  # This suffix will be added to backup files.
-        formatter = logging.Formatter('%(asctime)s.%(msecs)03d [%(levelname)s] %(message)s',
+        formatter = logging.Formatter('%(asctime)s [%(levelname)s] %(message)s',
                                       datefmt='%d-%m-%Y, %A %I:%M:%S %p')
         handler.setFormatter(formatter)
         logger.addHandler(handler)
