@@ -33,7 +33,9 @@ kafka_conf = {
     'max.poll.interval.ms': 300000
 }
 
+# message_queue = [None] * DISPLAY_LIST_SIZE
 message_queue = []
+insertion_index = 0
 messages_to_display = []
 last_update_time = time.time()
 connection_failure_message_sent = False
@@ -132,6 +134,7 @@ def _consume_messages():
                     try:
                         # key = message_from_kafka.key().decode()
                         decoded_kafka_message = message_from_kafka.value().decode()
+                        print(decoded_kafka_message)
                         # timestamp_type, timestamp_milliseconds = message_from_kafka.timestamp()
                         # timestamp = datetime.fromtimestamp(timestamp_milliseconds / 1000.0).strftime("%d-%m-%Y %I:%M:%S.%f %p")
                         # feedback_client_logger.debug(f"[KAFKA] Key = {key}, Message = {decoded_kafka_message}, Timestamp = {timestamp}")
@@ -139,16 +142,22 @@ def _consume_messages():
                         if decoded_kafka_message.startswith(("ERROR", "SUCCESS")):
                             message_queue = []
                             message_queue.insert(0, decoded_kafka_message)
+                            data = json.dumps({"messages": message_queue})
+                            post_message_queue_and_get_images(data)
+                            message_queue.clear()
                         else:
-                            if decoded_kafka_message.split(": ")[1] not in message_queue:
+                            # if any(msg.startswith("ERROR", "SUCCESS") for msg in message_queue):
+                            #     message_queue = []
+                            if decoded_kafka_message not in message_queue:
+                                # message_queue[insertion_index] = decoded_kafka_message
+                                # insertion_index = (insertion_index + 1) % DISPLAY_LIST_SIZE
                                 if len(message_queue) >= DISPLAY_LIST_SIZE:
                                     message_queue.pop()
-                                message_queue.insert(0, decoded_kafka_message.split(": ")[1])
+                                message_queue.insert(0, decoded_kafka_message)
+                                data = json.dumps({"messages": message_queue})
+                                post_message_queue_and_get_images(data)
 
-                        # print(message_queue)
-                        data = json.dumps({"messages": message_queue})
-                        post_message_queue_and_get_images(data)
-                        # message_queue.clear()
+                        print(message_queue)
                         last_update_time = time.time()
                     except Exception as e:
                         feedback_client_logger.exception("Error processing Kafka message")

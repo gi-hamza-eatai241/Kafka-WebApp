@@ -7,7 +7,8 @@
     <title>Kafka Messages</title>
     <style>
         body {
-            background: radial-gradient(#0202a8, #0000fb);
+            /* background: radial-gradient(#0202a8, #0000fb); */
+            background: black;
             color: #fff;
             background-size: cover;
             margin: 0;
@@ -17,18 +18,18 @@
         }
 
         nav {
-            height: 25vh;
+            height: 5vh;
         }
 
         main {
             width: 100%;
-            height: 70vh;
+            height: 95vh;
             display: flex;
         }
 
-        footer {
+        /* footer {
             height: 5vh;
-        }
+        } */
 
         .nav_logo {
             height: 50%;
@@ -36,9 +37,9 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-	    font-size:1.75vw;
-	    color: yellow;
-	}
+            font-size: 1.75vw;
+            color: yellow;
+        }
 
         .nav_logo>img {
             height: 70%;
@@ -46,12 +47,12 @@
         }
 
         .navlower {
-            height: 50%;
+            /* height: 50%; */
             font-size: 3vw;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: yellow;
+            color: white;
         }
 
         .navlower>img {
@@ -61,43 +62,25 @@
 
         table {
             height: 100%;
-            width: 60vw;
-            margin: auto;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        tbody {
             width: 100%;
         }
 
-        .row {
+        tbody#rows {
             width: 100%;
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-            justify-content: space-between;
-            font-size: 8vh;
+            height: 100%;
         }
 
-        .row>td>img {
-            height: 15vh;
-            border-radius: 10%;
-            border: 0.5vh solid rgb(97, 93, 93)
-        }
-
-        .error {
+        .error, .success {
             margin: auto;
             font-size: 6vh;
             text-align: center;
+        }
+
+        .error {
             color: #ff0000;
         }
 
         .success {
-            margin: auto;
-            font-size: 6vh;
-            text-align: center;
             color: #00ff00;
         }
 
@@ -109,198 +92,185 @@
         #disclaimer {
             display: none;
         }
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: repeat(2, auto);
+            gap: 2vh 2vw;
+            justify-items: center;
+            align-items: center;
+            height: 100%;
+            width: 100%;
+        }
+
+        .grid-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .grid-item img {
+            height: 35vh;
+            border-radius: 5%;
+            border: 0.5vh solid rgb(102, 255, 0);
+        }
+
+        .grid-item span {
+            font-size: 4vh;
+            margin-top: 1vh;
+            text-align: center;
+        }
     </style>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
 </head>
 
 <body>
-    <nav>
+    <!-- <nav>
         <div class="nav_logo">
             <img src="{{ url_for('static', filename='img/giventures-logo.png') }}" alt="">
-	    <div id="disclaimer">Your name will not be displayed if your dataset has not been created</div>
-	    <img src="{{ url_for('static', filename='img/abesit-logo.png') }}" alt="">
+            <div id="disclaimer">Your name will not be displayed if your dataset has not been created</div>
+            <img src="{{ url_for('static', filename='img/abesit-logo.png') }}" alt="">
         </div>
         <div class="navlower">
             <img src="{{ url_for('static', filename='img/camera-logo.png') }}" alt="">
             <div>PLEASE LOOK INTO THE CAMERA</div>
             <img src="{{ url_for('static', filename='img/camera-logo.png') }}" alt="">
-	</div>
+        </div>
+    </nav> -->
+    <nav>
+        <div class="navlower">PLEASE LOOK INTO THE CAMERA</div>
     </nav>
+
     <main>
         <table>
-            <tbody id="rows">
-            </tbody>
+            <tbody id="rows"></tbody>
         </table>
     </main>
-    <footer>
+
+    <!-- <footer>
         <img src="{{ url_for('static', filename='img/nvidia-logo.png') }}" alt="">
-    </footer>
+    </footer> -->
 
     <script type="text/javascript">
-        function getCurrentTimestamp() {
-            const now = new Date();
-
-            const year = now.getFullYear();
-            const month = String(now.getMonth() + 1).padStart(2, '0'); // Month is 0-indexed
-            const day = String(now.getDate()).padStart(2, '0');
-
-            let hours = now.getHours();
-            const minutes = String(now.getMinutes()).padStart(2, '0');
-            const seconds = String(now.getSeconds()).padStart(2, '0');
-            const milliseconds = String(now.getMilliseconds()).padStart(3, '0');
-
-            const ampm = hours >= 12 ? 'PM' : 'AM';
-            hours = hours % 12 || 12;
-            hours = String(hours).padStart(2, '0');
-
-            return `${day}-${month}-${year} ${hours}:${minutes}:${seconds}.${milliseconds} ${ampm}`;
-        }
-
         const socket = io.connect('http://' + document.domain + ':' + location.port);
         let lastUpdate = Date.now();
-        const clearIntervalTime = 15000; // 15 seconds
-        let errorMessage = ''; // Store the current error message
-        let successMessage = ''; // Store the current success message
-        let isErrorPersisted = false; // Flag to check if error message should persist
-        let isSuccessPersisted = false; // Flag to check if success message should persist
+        const clearIntervalTime = 15000;
+        let errorMessage = '';
+        let successMessage = '';
+        let isErrorPersisted = false;
+        let isSuccessPersisted = false;
 
-        socket.on('connect', function () {
-            // console.log("Connected to server");
-        });
+        socket.on('connect', function () { });
 
         socket.on('new_message', function (data) {
-            // if (data.message.length > 0) {
-                // pull out just the keys
-                // const ids = data.message.map(item => Object.keys(item)[0]);
-                // console.log(getCurrentTimestamp(), ids);
-            // }
-
             const errorMessages = data.message.filter(item => item.hasOwnProperty('ERROR'));
             const successMessages = data.message.filter(item => item.hasOwnProperty('SUCCESS'));
 
             if (errorMessages.length > 0) {
-                // console.log("Error message received:", errorMessages[0].ERROR);
                 errorMessage = errorMessages[0].ERROR;
                 isErrorPersisted = true;
-                isSuccessPersisted = false; // Clear success flag if an error occurs
-                successMessage = ''; // Clear success message if an error occurs
+                isSuccessPersisted = false;
+                successMessage = '';
             } else if (successMessages.length > 0) {
-                // console.log("Success message received:", successMessages[0].SUCCESS);
                 successMessage = successMessages[0].SUCCESS;
                 isSuccessPersisted = true;
-                isErrorPersisted = false; // Clear error flag if a success occurs
-                errorMessage = ''; // Clear error message if a success occurs
+                isErrorPersisted = false;
+                errorMessage = '';
                 if (successMessage === "✅ Facial Recognition Attendance System is Getting Started. Please Wait for 2 Minutes ✅") {
-                    setTimeout(() => {
-                        // console.log("Special success message display duration ended.");
-                        isSuccessPersisted = false;
-                    }, 120000); // Keep the message for 2 minutes
+                    setTimeout(() => { isSuccessPersisted = false; }, 120000);
                 } else {
-                    setTimeout(() => {
-                        // console.log("Normal success message display duration ended.");
-                        isSuccessPersisted = false;
-                    }, 5000); // Normal success message display duration
+                    setTimeout(() => { isSuccessPersisted = false; }, 5000);
                 }
             } else if (data.message.length > 0) {
-                // console.log("Normal messages received:", data.message);
                 isErrorPersisted = false;
-                errorMessage = ''; // Clear error message if valid data is received
+                errorMessage = '';
             }
 
             if (isErrorPersisted) {
-                // console.log("Displaying error message:", errorMessage);
                 updateMessage([{ 'ERROR': errorMessage }], 'error');
             } else if (isSuccessPersisted) {
-                // console.log("Displaying success message:", successMessage);
                 updateMessage([{ 'SUCCESS': successMessage }], 'success');
             } else {
-                // console.log("Displaying normal messages.");
                 updateMessage(data.message, 'normal');
             }
 
-            lastUpdate = Date.now(); // Update the last update time
+            lastUpdate = Date.now();
         });
 
         function updateMessage(message, messageType) {
-            // console.log("Updating message display:", message, messageType);
             const container = document.getElementById('rows');
-            container.innerHTML = ''; // Clear previous rows
+            container.innerHTML = '';
 
-            message.forEach(item => {
+            if (messageType === 'error' || messageType === 'success') {
                 const rowElement = document.createElement('tr');
                 rowElement.className = 'row';
 
-                const key = Object.keys(item)[0];
-                const value = item[key];
+                const key = Object.keys(message[0])[0];
+                const value = message[0][key];
 
-                if (key === 'SUCCESS') {
-                    // console.log("Creating SUCCESS message row.");
-                    const labelSuccessCell = document.createElement('td');
-                    const textElement = document.createElement('span');
-                    labelSuccessCell.classList.add('success');
-                    labelSuccessCell.colSpan = 2;
-                    textElement.textContent = value;
-                    labelSuccessCell.appendChild(textElement);
-                    rowElement.appendChild(labelSuccessCell);
-                } else if (key === 'ERROR') {
-                    // console.log("Creating ERROR message row.");
-                    const labelErrorCell = document.createElement('td');
-                    const textElement = document.createElement('span');
-                    labelErrorCell.classList.add('error');
-                    labelErrorCell.colSpan = 2;
-                    textElement.textContent = value;
-                    labelErrorCell.appendChild(textElement);
-                    rowElement.appendChild(labelErrorCell);
-                } else {
-                    // console.log("Creating normal message row.");
-                    // Create an image element
-                    const imageCell = document.createElement('td');
-                    const imageElement = document.createElement('img');
-                    imageElement.src = "data:image/jpg;base64," + value;
-                    imageCell.appendChild(imageElement);
+                const labelCell = document.createElement('td');
+                const textElement = document.createElement('span');
+                labelCell.colSpan = 2;
 
-                    // Create a text element for row data
-                    const labelCell = document.createElement('td');
-                    const textElement = document.createElement('span');
-                    textElement.classList.add('normal');
-                    textElement.textContent = key;
+                if (key === 'ERROR') {
+                    labelCell.classList.add('error');
+                    textElement.textContent = value;
                     labelCell.appendChild(textElement);
-
-                    // Append image and text to row element
-                    rowElement.appendChild(labelCell);
-                    rowElement.appendChild(imageCell);
+                } else if (key === 'SUCCESS') {
+                    labelCell.classList.add('success');
+                    textElement.textContent = value;
+                    labelCell.appendChild(textElement);
                 }
 
+                rowElement.appendChild(labelCell);
                 container.appendChild(rowElement);
-            });
-
-            // Adjust text color based on message type
-            const errorContainer = document.querySelector('.error');
-            const successContainer = document.querySelector('.success');
-            const normalContainers = document.querySelectorAll('.normal');
-            if (messageType === 'error' && errorContainer) {
-                errorContainer.style.color = '#FF0000';
-            } else if (messageType === 'success' && successContainer) {
-                successContainer.style.color = '#00FF00';
             } else {
-                normalContainers.forEach(container => {
-                    container.style.color = '#FFFFFF';
+                console.log(message);
+                
+                const gridContainer = document.createElement('div');
+                gridContainer.className = 'grid-container';
+
+                message.slice(0, 6).forEach(item => {
+                    const key = Object.keys(item)[0];
+                    const value = item[key];
+
+                    const gridItem = document.createElement('div');
+                    gridItem.className = 'grid-item';
+
+                    const img = document.createElement('img');
+                    img.src = "data:image/jpg;base64," + value;
+
+                    const label = document.createElement('span');
+                    label.classList.add('normal');
+                    label.textContent = key;
+
+                    gridItem.appendChild(img);
+                    gridItem.appendChild(label);
+                    gridContainer.appendChild(gridItem);
                 });
+
+                const row = document.createElement('tr');
+                const cell = document.createElement('td');
+                cell.colSpan = 3;
+                cell.appendChild(gridContainer);
+                row.appendChild(cell);
+                container.appendChild(row);
             }
         }
 
         setInterval(function () {
             socket.emit('check_updates');
-        }, 100); // Check for updates every 100 milliseconds (adjust as needed)
+        }, 100);
 
         setInterval(function () {
             if (!isErrorPersisted && !isSuccessPersisted && Date.now() - lastUpdate > clearIntervalTime) {
-                // console.log("Clearing messages due to inactivity.");
-                // Clear the message display if no updates for 10 seconds and no error or success displayed
                 updateMessage([], 'normal');
             }
-        }, 1000); // Check every second if messages should be cleared
+        }, 1000);
     </script>
+
     <script id="json-data" type="application/json">{{ message|tojson }}</script>
 </body>
 
