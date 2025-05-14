@@ -35,7 +35,7 @@ kafka_conf = {
 
 # message_queue = [None] * DISPLAY_LIST_SIZE
 message_queue = []
-insertion_index = 0
+# insertion_index = 0
 messages_to_display = []
 last_update_time = time.time()
 connection_failure_message_sent = False
