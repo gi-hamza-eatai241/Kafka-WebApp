@@ -140,10 +140,10 @@ def _consume_messages():
                             message_queue = []
                             message_queue.insert(0, decoded_kafka_message)
                         else:
-                            if decoded_kafka_message.split(": ")[1] not in message_queue:
+                            if decoded_kafka_message not in message_queue:
                                 if len(message_queue) >= DISPLAY_LIST_SIZE:
                                     message_queue.pop()
-                                message_queue.insert(0, decoded_kafka_message.split(": ")[1])
+                                message_queue.insert(0, decoded_kafka_message)
 
                         # print(message_queue)
                         data = json.dumps({"messages": message_queue})
