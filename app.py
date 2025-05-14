@@ -35,7 +35,7 @@ kafka_conf = {
 
 # message_queue = [None] * DISPLAY_LIST_SIZE
 message_queue = []
-# insertion_index = 0
+insertion_index = 0
 messages_to_display = []
 last_update_time = time.time()
 connection_failure_message_sent = False
@@ -72,6 +72,7 @@ def _consume_messages():
     global message_queue, last_update_time, messages_to_display
     global connection_failure_message_sent, project_services_down_message_sent
     global successful_reconnection_message_sent, project_restart_message_sent, kafka_consumer
+    global insertion_index
 
     server_ping_fail = 0
     services_ping_fail = 0
@@ -146,14 +147,15 @@ def _consume_messages():
                             post_message_queue_and_get_images(data)
                             message_queue.clear()
                         else:
-                            # if any(msg.startswith("ERROR", "SUCCESS") for msg in message_queue):
-                            #     message_queue = []
                             if decoded_kafka_message not in message_queue:
-                                # message_queue[insertion_index] = decoded_kafka_message
-                                # insertion_index = (insertion_index + 1) % DISPLAY_LIST_SIZE
-                                if len(message_queue) >= DISPLAY_LIST_SIZE:
-                                    message_queue.pop()
-                                message_queue.insert(0, decoded_kafka_message)
+                                # if len(message_queue) >= DISPLAY_LIST_SIZE:
+                                #     message_queue.pop()
+                                # message_queue.insert(0, decoded_kafka_message)
+                                if len(message_queue) < DISPLAY_LIST_SIZE:
+                                    message_queue.append(decoded_kafka_message)
+                                else:
+                                    message_queue[insertion_index] = decoded_kafka_message
+                                insertion_index = (insertion_index + 1) % DISPLAY_LIST_SIZE
                                 data = json.dumps({"messages": message_queue})
                                 post_message_queue_and_get_images(data)
 
