@@ -155,7 +155,7 @@ def _consume_messages():
                                     message_queue.append(decoded_kafka_message)
                                 else:
                                     message_queue[insertion_index] = decoded_kafka_message
-                                insertion_index = (insertion_index + 1) % DISPLAY_LIST_SIZE
+                                    insertion_index = (insertion_index + 1) % DISPLAY_LIST_SIZE
                                 data = json.dumps({"messages": message_queue})
                                 post_message_queue_and_get_images(data)
 
@@ -188,6 +188,7 @@ def _consume_messages():
                 server_ping_fail = 0
 
         if time.time() - last_update_time >= STATUS_THRESHOLD:
+            insertion_index = 0
             message_queue.clear()
             messages_to_display.clear()
             socketio.emit('new_message', {'message': messages_to_display})
