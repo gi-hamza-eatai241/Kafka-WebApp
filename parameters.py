@@ -8,8 +8,8 @@ PROJECT_SERVICES_PORT = [
     6381,                   # Redis Database
     20001,                  # Database-Controller
     20012,                  # Kafka-Message-Controller
-    20013,                  # Display-Image-Server
-    6386, 6970, 6971        # Face Liveness Detection
+    20013                   # Display-Image-Server
+    # 6386, 6970, 6971        # Face Liveness Detection
 ]
 
 # Kafka IP and Port
