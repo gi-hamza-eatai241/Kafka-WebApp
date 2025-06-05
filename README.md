@@ -212,7 +212,7 @@ unclutter -idle 0.5 -root &
 sed -i 's/"exited_cleanly":false/"exited_cleanly":true/' /home/raspberry/.config/chromium/Default/Preferences
 sed -i 's/"exit_type":"Crashed"/"exit_type":"Normal"/' /home/raspberry/.config/chromium/Default/Preferences
 
-/usr/bin/chromium-browser --noerrdialogs --disable-infobars --kiosk http://localhost:9090 &  # Adjust the URL
+/usr/bin/chromium-browser --noerrdialogs --disable-infobars --disable-application-cache --use-gl=egl --enable-gpu-rasterization --enable-native-gpu-memory-buffers --disable-software-rasterizer --kiosk http://localhost:9090 &  # Adjust the URL
 
 while true; do
     xdotool keydown ctrl+Tab; xdotool keyup ctrl+Tab;
@@ -242,7 +242,7 @@ After=graphical.target
 Environment=DISPLAY=:0.0
 Environment=XAUTHORITY=/home/raspberry/.Xauthority
 Type=simple
-ExecStart=/bin/bash /usr/local/bin/kiosk.sh
+ExecStart=/bin/bash /usr/local/bin/kiosk-startup.sh
 Restart=on-abort
 User=raspberry
 Group=raspberry
