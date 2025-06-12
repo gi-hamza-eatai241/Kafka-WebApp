@@ -17,8 +17,8 @@ CONFLUENT_KAFKA_IP_ADDRESS = DGX_IP_ADDRESS
 CONFLUENT_KAFKA_PORT = 9092
 
 # Kafka topic for messages
-CONFLUENT_KAFKA_TOPIC = "maingate_exit"
-CONFLUENT_KAFKA_PARTITION = 4
+CONFLUENT_KAFKA_TOPIC = "maingate_entry"
+CONFLUENT_KAFKA_PARTITION = 6
 
 # Number of names to be displayed at once
 DISPLAY_LIST_SIZE = 6
