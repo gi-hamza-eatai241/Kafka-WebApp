@@ -8,8 +8,8 @@ PROJECT_SERVICES_PORT = [
     6381,                   # Redis Database
     20001,                  # Database-Controller
     20012,                  # Kafka-Message-Controller
-    20013,                  # Display-Image-Server
-    6386, 6970, 6971        # Face Liveness Detection
+    20013                   # Display-Image-Server
+    # 6386, 6970, 6971        # Face Liveness Detection
 ]
 
 # Kafka IP and Port
@@ -17,8 +17,8 @@ CONFLUENT_KAFKA_IP_ADDRESS = DGX_IP_ADDRESS
 CONFLUENT_KAFKA_PORT = 9092
 
 # Kafka topic for messages
-CONFLUENT_KAFKA_TOPIC = "maingate_entry"
-CONFLUENT_KAFKA_PARTITION = 0
+CONFLUENT_KAFKA_TOPIC = "maingate_exit"
+CONFLUENT_KAFKA_PARTITION = 8
 
 # Number of names to be displayed at once
 DISPLAY_LIST_SIZE = 6

@@ -18,14 +18,18 @@
         }
 
         nav {
-            height: 7vh;
+            height: 5vh;
         }
 
         main {
             width: 100%;
-            height: 90vh;
+            height: 95vh;
             display: flex;
         }
+
+        /* footer {
+            height: 5vh;
+        } */
 
         .nav_logo {
             height: 50%;
@@ -66,8 +70,7 @@
             height: 100%;
         }
 
-        .error,
-        .success {
+        .error, .success {
             margin: auto;
             font-size: 6vh;
             text-align: center;
@@ -93,11 +96,10 @@
         .grid-container {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            /* grid-template-rows: repeat(2, auto); */
-            grid-auto-rows: 45vh;
-            /* gap: 2vh 2vw; */
+            grid-template-rows: repeat(2, auto);
+            gap: 2vh 2vw;
             justify-items: center;
-            align-items: center;
+            align-items: flex-start;
             height: 100%;
             width: 100%;
         }
@@ -105,7 +107,7 @@
         .grid-item {
             display: flex;
             flex-direction: column;
-            align-items: flex;
+            align-items: center;
         }
 
         .grid-item img {
@@ -116,82 +118,8 @@
 
         .grid-item span {
             font-size: 4vh;
-            /* margin-top: 1vh; */
+            margin-top: 1vh;
             text-align: center;
-        }
-
-        .heading {
-            font-size: 78px;
-            font-weight: bold;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            position: absolute;
-            top: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-        }
-
-        .logo {
-            width: 300px;
-            margin: 20px 0;
-            animation: fadeInZoom 3s ease-in-out infinite;
-        }
-
-        @keyframes fadeInZoom {
-
-            0%,
-            100% {
-                opacity: 0.5;
-                transform: scale(2.5);
-            }
-
-            50% {
-                opacity: 1;
-                transform: scale(4);
-            }
-        }
-
-        .instruction {
-            font-size: 50px;
-            font-weight: bold;
-            color: #ccc;
-            position: absolute;
-            bottom: 80px;
-            left: 50%;
-            transform: translateX(-50%);
-            text-align: center;
-            width: 100%;
-            z-index: 5;
-        }
-
-        .marquee-container {
-            width: 100%;
-            overflow: hidden;
-            white-space: nowrap;
-            position: absolute;
-            bottom: 0;
-            background-color: #00ff00;
-            padding: 15px 0;
-        }
-
-        .marquee-text {
-            display: inline-block;
-            padding-left: 100%;
-            animation: marquee 10s linear infinite;
-            color: #000;
-            font-size: 40px;
-            font-weight: bold;
-        }
-
-        @keyframes marquee {
-            0% {
-                transform: translateX(0%);
-            }
-
-            100% {
-                transform: translateX(-100%);
-            }
         }
     </style>
 
@@ -199,27 +127,26 @@
 </head>
 
 <body>
+    <!-- <nav>
+        <div class="nav_logo">
+            <img src="{{ url_for('static', filename='img/giventures-logo.png') }}" alt="">
+            <div id="disclaimer">Your name will not be displayed if your dataset has not been created</div>
+            <img src="{{ url_for('static', filename='img/abesit-logo.png') }}" alt="">
+        </div>
+        <div class="navlower">
+            <img src="{{ url_for('static', filename='img/camera-logo.png') }}" alt="">
+            <div>PLEASE LOOK INTO THE CAMERA</div>
+            <img src="{{ url_for('static', filename='img/camera-logo.png') }}" alt="">
+        </div>
+    </nav> -->
     <nav>
         <div class="navlower">PLEASE LOOK INTO THE CAMERA</div>
     </nav>
-    <div id="fallback-template"
-        style="text-align: center; color: white; height: 90vh; display: flex; flex-direction: column; justify-content: center; align-items: center;">
-        <img src="static/img/abesit.png" alt="ABESIT Logo" class="logo" />
-        <div class="instruction" style="font-size: 4vh; margin-top: 2vh;">
-            Stand in front of the camera to begin verification
-        </div>
-        <div class="marquee-container" style="overflow: hidden; white-space: nowrap; width: 100%; margin-top: 2vh;">
-            <div class="marquee-text"
-                style="display: inline-block; animation: marquee 10s linear infinite; font-size: 3vh;">
-                Camera Active – Waiting for Student...
-            </div>
-        </div>
-    </div>
-    <main id="main">
+
+    <main>
         <table>
             <tbody id="rows"></tbody>
         </table>
-
     </main>
 
     <!-- <footer>
@@ -274,14 +201,9 @@
 
         function updateMessage(message, messageType) {
             const container = document.getElementById('rows');
-            const main = document.getElementById('main');
-            const fallback = document.getElementById('fallback-template');
-
             container.innerHTML = '';
 
             if (messageType === 'error' || messageType === 'success') {
-                fallback.style.display = 'none';
-                main.style.display = 'block';
                 const rowElement = document.createElement('tr');
                 rowElement.className = 'row';
 
@@ -304,13 +226,9 @@
 
                 rowElement.appendChild(labelCell);
                 container.appendChild(rowElement);
-            } else if (message.length === 0) {
-                fallback.style.display = 'flex';
-                main.style.display = 'none';
             } else {
                 console.log(message);
-                fallback.style.display = 'none';
-                main.style.display = 'block';
+                
                 const gridContainer = document.createElement('div');
                 gridContainer.className = 'grid-container';
 
